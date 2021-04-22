@@ -17,11 +17,15 @@ export function Confirmation() {
 
   const navigation = useNavigation();
 
+  function handleMoveOn() {
+    navigation.navigate('SelectPlant')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.content}>
         <Text style={styles.emoji}>
-          🖕
+          😄
         </Text>
 
         <Text style={styles.title}>
@@ -34,6 +38,7 @@ export function Confirmation() {
         </Text>
         <View style={styles.footer}>
           <Button
+            onPress={handleMoveOn}
             title={'Começar'}
           />
         </View>
