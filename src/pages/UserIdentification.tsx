@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -8,8 +8,10 @@ import {
   KeyboardAvoidingView,
   Platform,
   TouchableWithoutFeedback,
-  Keyboard
+  Keyboard,
+  Alert
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import { useNavigation } from '@react-navigation/core';
@@ -25,8 +27,12 @@ export function UserIdentification() {
   const navigation = useNavigation();
 
 
-  function handleConfirmation() {
-    navigation.navigate('Confirmation')
+  async function handleConfirmation() {
+    if (!name) {
+      return Alert.alert('OPS...', 'Ainda não sei o seu nome 😞');
+    }
+    await AsyncStorage.setItem('@plantmanager:user', name);
+    navigation.navigate('Confirmation');
   }
 
   function handleInputBlur() {
